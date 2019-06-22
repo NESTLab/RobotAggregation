@@ -77,8 +77,6 @@ def plot_func(args):
     costs = costs[sorted_indeces]
 
     fig, ax = plt.subplots()
-    print(proportions_to_max.shape)
-    print(costs.shape)
     my_boxplot(ax, proportions_to_max, costs, width=0.5)
     plt.xlabel("Sensor Range, Percentage of Maximum")
     plt.ylabel("Cost")
