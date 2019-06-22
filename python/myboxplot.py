@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.ticker import FormatStrFormatter
+
 
 def my_boxplot(ax, positions, values, width=None, color=None, label=None):
     """Custom box plot to work around some of matplotlib's quirks.
@@ -22,6 +22,7 @@ def my_boxplot(ax, positions, values, width=None, color=None, label=None):
     if color is None:
         color = 'k'
 
+    positions = [int(p) for p in positions]
     x = np.column_stack((positions, positions))
     p25, p75 = np.percentile(values, [25, 75], axis=1)
     whisker_lower = np.column_stack((np.min(values, axis=1), p25))
