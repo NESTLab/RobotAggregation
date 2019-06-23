@@ -2,7 +2,7 @@
 #SBATCH -N 1
 #SBATCH -n 25
 #SBATCH -t 12:00:00
-#SBATCH -J n_classes
+#SBATCH -J n_classes_10_per_class
 
 # Stop execution after any error
 set -e
@@ -36,10 +36,10 @@ cp $PROJDIR/CMakeLists.txt .
 
 # Execute program (this also writes files in work dir)
 echo $WORKDIR
-./python/analyze_num_classes_100_total.py evaluate experiments/n_classes/100_total/* build/loop_functions/libsegregation_loop_function.so params/new_grid_search.dat -p 25 -t 100
+./python/analyze_num_classes_10_per_class.py evaluate experiments/n_classes/10_per_class/* build/loop_functions/libsegregation_loop_function.so params/new_grid_search.dat -p 25 -t 100
 
 # Transfer generated files into home directory
-cp n_classes_* $DATADIR/100_total
+cp n_classes_* $DATADIR/10_per_class
 
 # Cleanup
 rm -r $WORKDIR
