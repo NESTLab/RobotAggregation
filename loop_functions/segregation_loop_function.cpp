@@ -224,10 +224,12 @@ void SegregationLoopFunction::PostStep() {
 
     // Centroid of centroid metric -- NOT USED IN OUR PAPER!
     // m_cost += m_step * centroid_of_centroids(class_pos);
-    // Discounted
-    // m_cost += m_step * cluster_metric(class_pos);
-    // Un-Discounted Cluster Metric, doesn't penalize time
-    m_cost += cluster_metric(class_pos);
+
+    // Not-Time-Penalized Cluster Metric, doesn't penalize time -- NOT USED IN OUR PAPER!
+    // m_cost += cluster_metric(class_pos);
+
+    // Time-Penalized Clust Metric
+     m_cost += m_step * cluster_metric(class_pos);
   } catch (argos::CARGoSException &e) {
     argos::LOG << e.what() << std::endl;
     m_cost = -999;
