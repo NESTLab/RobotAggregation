@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
+import argparse
+import csv
+import os
+
 import numpy as np
 from scipy import stats
-import os
-import csv
-import argparse
 
 
 def main():
@@ -22,12 +23,11 @@ def main():
     args = parser.parse_args()
 
     if args.plot or args.viz:
-      style_dir = os.path.dirname(os.path.realpath(__file__))
-      style = os.path.join(style_dir, "mpl.style")
-      import matplotlib.pyplot as plt
-      plt.style.use(style)
+        style_dir = os.path.dirname(os.path.realpath(__file__))
+        style = os.path.join(style_dir, "mpl.style")
+        import matplotlib.pyplot as plt
+        plt.style.use(style)
 
-    std_costs = np.zeros((args.resolution ** 6))
     f = np.genfromtxt(args.merged_grid_search_outputs, skip_header=True)
 
     env_start_idx = 7
@@ -41,8 +41,8 @@ def main():
 
     if args.outfile:
         writer = csv.writer(open(args.outfile, 'w'), delimiter=',')
-        for i, (p, c, s) in enumerate(zip(params, mean_costs, std_costs)):
-            writer.writerow([i, p, c, s])
+        for ss_diff_index, (p, c, s) in enumerate(zip(params, mean_costs, std_costs)):
+            writer.writerow([ss_diff_index, p, c, s])
 
     if args.viz or args.save:
         axes_titles = [r'$v_{l_0}$', r'$v_{r_0}$', r'$v_{l_1}$', r'$v_{r_1}$', r'$v_{l_2}$', r'$v_{r_2}$']
@@ -77,11 +77,11 @@ def main():
     all_costs = all_costs[sorted_cost_indeces]
     print("Best Params, Index, Cost")
     print("{} {:0.0f} {:0.0f}".format(params[0], mean_costs[0], std_costs[0]))
-    print("="*85)
+    print("=" * 85)
 
     print("Good params")
     unknown_controllers = 0
-    for i, p in enumerate(params[:args.best_n]):
+    for ss_diff_index, p in enumerate(params[:args.best_n]):
         # check if this matches the "patterns" of known segregating controllers
         # this never prints anything because turns out they all can be described this way
         if args.ignore_known_controllers:
@@ -99,36 +99,47 @@ def main():
                         # right-hand circles segregating
                         continue
                     else:
-                        #slow clustering segregation?
+                        # slow clustering segregation?
                         continue
         unknown_controllers += 1
-        print(p, "{:d}th {:0.0f} {:0.0f}".format(i, mean_costs[i], std_costs[i]))
+        print(p, "{:d}th {:0.0f} {:0.0f}".format(ss_diff_index, mean_costs[ss_diff_index], std_costs[ss_diff_index]))
 
-    best_costs = all_costs[0]
+    best_cost = all_costs[0]
     inconclusive = True
-    found_og_params = False
-    for i, costs in enumerate(all_costs):
-        t_value, p_value = stats.ttest_ind(best_costs, costs, equal_var=False)
-        if np.allclose(params[i], [1, -2/3, 1/3, 1, 1, 0]):
-            print("P value of old params: ", i, p_value, mean_costs[i], std_costs[i], mean_costs[0], std_costs[0], params[i])
-            found_og_params = True
+    for ss_diff_index, costs in enumerate(all_costs):
+        t_value, p_value = stats.ttest_ind(best_cost, costs, equal_var=False)
+        if np.allclose(params[ss_diff_index], [1, -2 / 3, 1 / 3, 1, 1, 0]):
+            print("P value of old params: ", ss_diff_index, p_value, mean_costs[ss_diff_index],
+                  std_costs[ss_diff_index], mean_costs[0], std_costs[0],
+                  params[ss_diff_index])
             break
         if p_value < 0.05 and inconclusive:
             inconclusive = False
-            print("top {} params are not statistically significantly different".format(i))
-        if found_og_params and not inconclusive:
+            print("top {} params are not statistically significantly different".format(ss_diff_index))
             break
     if inconclusive:
         print("cannot conclude that the worst params are not identical mean to the best params...")
 
-
     if args.plot:
         plt.figure()
-        c = mean_costs[::1000]
+        every_n = 50
+        c = mean_costs[::every_n]
         N = len(c)
-        plt.bar(np.arange(N), c, yerr=std_costs[::1000])
-        plt.ylabel("cost")
-        plt.title("every 1000th parameter set, sorted from best to worst")
+        ss_diff_cost = mean_costs[ss_diff_index]
+        markers, caps, bars = plt.errorbar(np.arange(N), c, yerr=std_costs[::every_n], xerr=None, fmt='.',
+                                           ecolor='black', zorder=1,
+                                           capsize=2, capthick=2)
+        # markers.set_zorder(-1)
+        [bar.set_alpha(0.05) for bar in bars]
+        [cap.set_alpha(0.2) for cap in caps]
+
+        plt.plot([0, N], [ss_diff_cost, ss_diff_cost], c='r', zorder=2)
+        plt.plot([0, N], [mean_costs[0] + std_costs[0], mean_costs[0] + std_costs[0]], c='#23FF00', zorder=2)
+        plt.plot([0, N], [mean_costs[0] + 2 * std_costs[0], mean_costs[0] + 2 * std_costs[0]], c='#17AA00', zorder=2)
+        plt.plot([0, N], [mean_costs[0], mean_costs[0]], c='k', zorder=1)
+
+        plt.xlabel("Parameters from Grid Search (sorted)")
+        plt.ylabel("Cost")
         plt.gca().set_xticklabels([])
 
     if args.plot or args.viz:
