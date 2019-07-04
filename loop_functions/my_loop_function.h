@@ -14,7 +14,7 @@ using GroupPosMap = std::unordered_map<unsigned long, std::vector<CVector3>>;
 
 class MyLoopFunction : public CLoopFunctions {
 
-public:
+ public:
 
   void Reset() override = 0;
 

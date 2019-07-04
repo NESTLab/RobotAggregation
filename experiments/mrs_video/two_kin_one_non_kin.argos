@@ -20,14 +20,15 @@
         <range_and_bearing implementation="medium" medium="rab" show_rays="false"/>
         <positioning implementation="default"/>
       </sensors>
-      <params/>
+      <params half_beam_angle="40"/>
     </footbot_segregation_controller>
 
   </controllers>
 
-  <loop_functions random_seed="0" num_classes="8">
-    <single center="9.2,9.2" class="0" />
-    <single center="-9.2,-9.2" class="0" />
+  <loop_functions random_seed="2" num_classes="8" stdev="0.0">
+    <single center="0,0" class="0" />
+    <single center="0,1.5" class="0" />
+    <single center="1.5,0" class="1" />
 
   </loop_functions>
 

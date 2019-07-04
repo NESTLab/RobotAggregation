@@ -13,7 +13,7 @@ void SegregationFootbotController::Init(TConfigurationNode &t_node) {
     m_pcRABAct = GetActuator<CCI_RangeAndBearingActuator>("range_and_bearing");
     m_pcRABSens = GetSensor<CCI_RangeAndBearingSensor>("range_and_bearing");
     m_pcLEDs = GetActuator<CCI_LEDsActuator>("leds");
-
+    m_pcPosSens = GetSensor<CCI_PositioningSensor>("positioning");
   }
   catch (CARGoSException &ex) {
     THROW_ARGOSEXCEPTION_NESTED("Error initializing sensors/actuators", ex);
@@ -33,15 +33,12 @@ void SegregationFootbotController::Init(TConfigurationNode &t_node) {
   half_beam_angle = deg2rad(half_beam_angle_deg);
 
   if (sensor_implementation_str == "kin_first") {
-    sensor_impl =  SensorImpl::KIN_FIRST;
-  }
-  else if (sensor_implementation_str == "closest_first") {
-    sensor_impl =  SensorImpl::CLOSEST_FIRST;
-  }
-  else if (sensor_implementation_str.empty()) {
-    sensor_impl =  SensorImpl::CLOSEST_FIRST;
-  }
-  else {
+    sensor_impl = SensorImpl::KIN_FIRST;
+  } else if (sensor_implementation_str == "closest_first") {
+    sensor_impl = SensorImpl::CLOSEST_FIRST;
+  } else if (sensor_implementation_str.empty()) {
+    sensor_impl = SensorImpl::CLOSEST_FIRST;
+  } else {
     THROW_ARGOSEXCEPTION("sensor implementation must be either \"closest_first\" or \"kin_first\"")
   }
 
@@ -193,6 +190,16 @@ void SegregationFootbotController::ControlStep() {
     }
   }
   auto true_sensor_state = GetTrueKinSensorVal();
+
+  auto const &posMsgs = m_pcPosSens->GetReading();
+  std::cout << m_class
+            << ","
+            << static_cast<int>(true_sensor_state)
+            << ","
+            << posMsgs.Position.GetX()
+            << ","
+            << posMsgs.Position.GetY()
+            << ',';
 
   auto p = m_rng->Uniform(CRange<double>(0., 1.));
   auto sensor_state = true_sensor_state;

@@ -25,7 +25,7 @@ int main(int argc, const char **argv) {
                                                      ".dat file of controller parameters, \
                                                      or a string of the genom is --params-as-string is passed",
                                                      args::Options::Required);
-  args::ValueFlag<unsigned int> trials_flag(parser, "trials", "number of trails", {'t', "trials"}, 4);
+  args::ValueFlag<unsigned int> trials_flag(parser, "trials", "number of trails", {'t', "trials"}, 1);
   args::ValueFlag<unsigned int> num_steps_flag(parser, "num_steps", "number of time steps", {'s', "steps"}, 180);
   args::ValueFlag<float> sensor_length_flag(parser, "sensor_length_cm", "max range of sensor", {"sensor-length"}, -1);
   args::Flag viz_flag(parser, "viz", "show argos visualization", {'z', "viz"}, false);
@@ -34,8 +34,6 @@ int main(int argc, const char **argv) {
                                 {"params-as-string"}, false);
   args::Flag print_mean_flag(parser, "print_mean", "print mean of costs", {'m', "mean"}, false);
   args::Flag quiet_flag(parser, "quiet", "don't print cost at each time step", {'q', "quiet"}, false);
-
-  std::cout << "Make sure you run this from the root of the project, not within a build directory\n\n";
 
   try {
     parser.ParseCLI(argc, argv);
@@ -52,15 +50,20 @@ int main(int argc, const char **argv) {
   }
 
   auto &argos_filename = args::get(base_argos_config_flag);
-  auto library_path = args::get(library_path_flag);
-  auto generate_poses = args::get(generate_poses_flag);
-  auto num_steps = args::get(num_steps_flag);
-  auto viz = args::get(viz_flag);
-  auto sensor_length_cm = args::get(sensor_length_flag);
-  auto print_mean = args::get(print_mean_flag);
-  auto params_str = args::get(params_filename_flag);
+  auto const library_path = args::get(library_path_flag);
+  auto const generate_poses = args::get(generate_poses_flag);
+  auto const quiet = args::get(quiet_flag);
+  auto const num_steps = args::get(num_steps_flag);
+  auto const viz = args::get(viz_flag);
+  auto const sensor_length_cm = args::get(sensor_length_flag);
+  auto const print_mean = args::get(print_mean_flag);
+  auto const params_str = args::get(params_filename_flag);
   auto const params_as_str = args::get(params_as_str_flag);
   unsigned int const num_trials = args::get(trials_flag);
+
+  if (!quiet) {
+    std::cout << "Make sure you run this from the root of the project, not within a build directory\n\n";
+  }
 
   auto position = library_path.rfind('/') + 4;
   auto library_label = library_path.substr(position, library_path.size() - position - 3);
@@ -167,7 +170,7 @@ int main(int argc, const char **argv) {
       }
       j.push_back(trial_j);
     }
-    if (!generate_poses) {
+    if (!generate_poses and !quiet) {
       std::cout << cost << '\n';
       cost_sum += cost;
     }

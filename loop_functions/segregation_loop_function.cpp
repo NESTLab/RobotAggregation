@@ -236,6 +236,7 @@ void SegregationLoopFunction::PostStep() {
   }
 
   ++m_step;
+  std::cout << '\n';
 }
 
 std::string SegregationLoopFunction::GetName() {

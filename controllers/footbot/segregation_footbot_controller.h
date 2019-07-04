@@ -8,6 +8,7 @@
 #include <argos3/plugins/robots/generic/control_interface/ci_leds_actuator.h>
 #include <argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_actuator.h>
 #include <argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_sensor.h>
+#include <argos3/plugins/robots/generic/control_interface/ci_positioning_sensor.h>
 
 using namespace argos;
 
@@ -59,6 +60,7 @@ public:
   CCI_RangeAndBearingActuator *m_pcRABAct = nullptr;
   CCI_RangeAndBearingSensor *m_pcRABSens = nullptr;
   CCI_LEDsActuator *m_pcLEDs = nullptr;
+  CCI_PositioningSensor *m_pcPosSens = nullptr;
   CRandom::CRNG *m_rng = nullptr;
 
   Real half_beam_angle = deg2rad(15.0);
