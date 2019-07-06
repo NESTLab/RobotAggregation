@@ -192,6 +192,8 @@ void SegregationFootbotController::ControlStep() {
   auto true_sensor_state = GetTrueKinSensorVal();
 
   auto const &posMsgs = m_pcPosSens->GetReading();
+  CRadians yaw, other;
+  posMsgs.Orientation.ToEulerAngles(yaw, other, other);
   std::cout << m_class
             << ","
             << static_cast<int>(true_sensor_state)
@@ -199,6 +201,8 @@ void SegregationFootbotController::ControlStep() {
             << posMsgs.Position.GetX()
             << ","
             << posMsgs.Position.GetY()
+            << ","
+            << yaw.GetValue()
             << ',';
 
   auto p = m_rng->Uniform(CRange<double>(0., 1.));
