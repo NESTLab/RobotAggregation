@@ -133,12 +133,22 @@ def main():
         [bar.set_alpha(0.05) for bar in bars]
         [cap.set_alpha(0.2) for cap in caps]
 
-        plt.plot([0, N], [ss_diff_cost, ss_diff_cost], c='r', zorder=2)
-        plt.plot([0, N], [mean_costs[0] + std_costs[0], mean_costs[0] + std_costs[0]], c='#23FF00', zorder=2)
-        plt.plot([0, N], [mean_costs[0] + 2 * std_costs[0], mean_costs[0] + 2 * std_costs[0]], c='#17AA00', zorder=2)
-        plt.plot([0, N], [mean_costs[0], mean_costs[0]], c='k', zorder=1)
+        line_text_size = 16
+        line_text_offset = 1000
+        plt.plot([0, N], [ss_diff_cost, ss_diff_cost], c='r', zorder=2, linestyle='dashed')
+        plt.text(N // 2, ss_diff_cost + line_text_offset, "statistically significantly worse", fontsize=line_text_size,
+                 verticalalignment='bottom')
+        plt.plot([0, N], [mean_costs[0] + std_costs[0], mean_costs[0] + std_costs[0]], c='k', zorder=2,
+                 linestyle='dotted')
+        plt.text(N // 2, mean_costs[0] + std_costs[0] + line_text_offset, "one standard deviation",
+                 fontsize=line_text_size,
+                 verticalalignment='bottom')
+        plt.plot([0, N], [mean_costs[0], mean_costs[0]], c='g', zorder=1, linestyle='solid')
+        plt.text(N // 2, mean_costs[0], "lowest mean cost", fontsize=line_text_size,
+                 verticalalignment='center', bbox=dict(color='white', facecolor='white', alpha=0.7))
 
         plt.xlabel("Parameters from Grid Search (sorted)")
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
         plt.ylabel("Cost")
         plt.gca().set_xticklabels([])
 
