@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1440"
+   height="1080"
+   viewBox="0 0 380.99999 285.75"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
+   sodipodi:docname="title.svg"
+   inkscape:export-filename="/Users/pincy/Fabrica/NEST/minimalist_segregation/video/title.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.46851852"
+     inkscape:cx="357.15415"
+     inkscape:cy="540"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:showpageshadow="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="719"
+     inkscape:window-x="0"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-11.24998)">
+    <g
+       id="g41"
+       transform="matrix(1.8244207,0,0,1.8244207,-2.5845305,-242.91453)">
+      <text
+         id="text12"
+         y="160.1721"
+         x="106.22377"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87777805px;line-height:125%;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:11.28888988px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Bold';text-align:center;text-anchor:middle;stroke-width:0.26458332px"
+           y="160.1721"
+           x="106.22377"
+           id="tspan10"
+           sodipodi:role="line">A Minimalistic Approach to Segregation</tspan><tspan
+           id="tspan14"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:11.28888988px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Bold';text-align:center;text-anchor:middle;stroke-width:0.26458332px"
+           y="172.92149"
+           x="106.22377"
+           sodipodi:role="line">in Robot Swarms</tspan></text>
+      <text
+         id="text18"
+         y="197.9789"
+         x="105.79982"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.8777771px;line-height:125%;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Italic';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Italic';text-align:center;text-anchor:middle;stroke-width:0.26458332px"
+           y="197.9789"
+           x="105.79982"
+           id="tspan16"
+           sodipodi:role="line">Peter Mitrano<tspan
+   id="tspan22"
+   style="font-size:64.99999762%;baseline-shift:super">1</tspan>, Jordan Burklund<tspan
+   id="tspan24"
+   style="font-size:64.99999762%;baseline-shift:super">2</tspan>,</tspan><tspan
+           id="tspan20"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Italic';text-align:center;text-anchor:middle;stroke-width:0.26458332px"
+           y="211.57283"
+           x="105.79982"
+           sodipodi:role="line">Michael Giancola<tspan
+   id="tspan26"
+   style="font-size:64.99999762%;baseline-shift:super">2</tspan>, Carlo Pinciroli<tspan
+   id="tspan28"
+   style="font-size:64.99999762%;baseline-shift:super">2</tspan></tspan></text>
+      <text
+         id="text32"
+         y="238.68724"
+         x="106.00915"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;line-height:125%;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-size:8.46666622px;text-align:center;text-anchor:middle;stroke-width:0.26458332px"
+           y="238.68724"
+           x="106.00915"
+           id="tspan30"
+           sodipodi:role="line"><tspan
+   id="tspan40"
+   style="font-size:64.99999762%;text-align:center;baseline-shift:super;text-anchor:middle">1</tspan> University of Michigan</tspan><tspan
+           id="tspan34"
+           style="font-size:8.46666622px;text-align:center;text-anchor:middle;stroke-width:0.26458332px"
+           y="250.11513"
+           x="106.00915"
+           sodipodi:role="line"><tspan
+   id="tspan42"
+   style="font-size:64.99999762%;text-align:center;baseline-shift:super;text-anchor:middle">2</tspan> Worcester Polytechnic Institute</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888903px;line-height:125%;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="105.24345"
+         y="283.18115"
+         id="text52"><tspan
+           sodipodi:role="line"
+           x="105.24345"
+           y="283.18115"
+           style="font-size:4.93888903px;text-align:center;text-anchor:middle;stroke-width:0.26458332px"
+           id="tspan50">2nd IEEE International Symposium on Multi-Robot and Multi-Agent Systems (MRS'19)</tspan></text>
+    </g>
+  </g>
+</svg>
