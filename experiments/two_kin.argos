@@ -25,13 +25,13 @@
 
   </controllers>
 
-  <loop_functions random_seed="0" num_classes="8">
-    <single center="9.2,9.2" class="0" />
-    <single center="-9.2,-9.2" class="0" />
+  <loop_functions random_seed="0" num_classes="2">
+    <single center="0.5,0.5" class="0" />
+    <single center="-0.5,-0.5" class="0" />
 
   </loop_functions>
 
-  <arena size="60, 60, 2" center="0,0,1">
+  <arena size="10, 10, 2" center="0,0,1">
 
   </arena>
 

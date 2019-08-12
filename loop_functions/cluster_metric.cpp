@@ -76,7 +76,8 @@ Real cluster_metric(const GroupPosMap groups) {
     }
     free(A);
 
-    cost += -static_cast<Real>(largest_component_size) / poses.size();
+    auto const cost_t = -static_cast<Real>(largest_component_size) / poses.size();
+    cost += cost_t;
   }
 
   return cost / groups.size();

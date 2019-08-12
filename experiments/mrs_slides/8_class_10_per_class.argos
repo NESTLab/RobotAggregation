@@ -20,17 +20,29 @@
         <range_and_bearing implementation="medium" medium="rab" show_rays="false"/>
         <positioning implementation="default"/>
       </sensors>
-      <params/>
+      <params sensor_implementation="kin_first"/>
     </footbot_segregation_controller>
 
   </controllers>
 
-  <loop_functions random_seed="0" num_classes="17">
-    <cluster center="0,0" robot_num="100" robot_density="0.10" />
+  <loop_functions random_seed="0" num_classes="8">
+    <cluster center="0,0" robot_num="80" robot_density="0.10" />
 
   </loop_functions>
 
-  <arena size="50, 50, 2" center="0,0,1">
+  <arena size="11, 11, 2" center="0,0,1">
+    <box id="wall_east" size="10,0.1,0.5" movable="false">
+      <body position="0,5,0" orientation="0,0,0"/>
+    </box>
+    <box id="wall_west" size="10,0.1,0.5" movable="false">
+      <body position="0,-5,0" orientation="0,0,0"/>
+    </box>
+    <box id="wall_north" size="0.1,10,0.5" movable="false">
+      <body position="5,0,0" orientation="0,0,0"/>
+    </box>
+    <box id="wall_south" size="0.1,10,0.5" movable="false">
+      <body position="-5,,0" orientation="0,0,0"/>
+    </box>
   </arena>
 
   <physics_engines>

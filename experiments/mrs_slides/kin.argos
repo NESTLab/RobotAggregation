@@ -4,7 +4,7 @@
 
   <framework>
     <system threads="0"/>
-    <experiment length="180" ticks_per_second="10" random_seed="312"/>
+    <experiment length="180" ticks_per_second="10" random_seed="12"/>
   </framework>
 
   <controllers>
@@ -25,12 +25,29 @@
 
   </controllers>
 
-  <loop_functions random_seed="0" num_classes="17">
-    <cluster center="0,0" robot_num="100" robot_density="0.10" />
+  <loop_functions random_seed="0" num_classes="1">
+    <cluster center="0,0" robot_num="1" robot_density="0.05" />
 
   </loop_functions>
 
-  <arena size="50, 50, 2" center="0,0,1">
+  <arena size="6, 6, 2" center="0,0,1">
+
+    <box id="wall_north" size="5,0.1,0.5" movable="false">
+      <body position="0,2.5,0" orientation="0,0,0"/>
+    </box>
+
+    <box id="wall_south" size="5,0.1,0.5" movable="false">
+      <body position="0,-2.5,0" orientation="0,0,0"/>
+    </box>
+
+    <box id="wall_east" size="0.1,5,0.5" movable="false">
+      <body position="-2.5,0,0" orientation="0,0,0"/>
+    </box>
+
+    <box id="wall_west" size="0.1,5,0.5" movable="false">
+      <body position="2.5,0,0" orientation="0,0,0"/>
+    </box>
+
   </arena>
 
   <physics_engines>

@@ -2,6 +2,7 @@
 #include "segregation_footbot_controller.h"
 
 #include <cstdio>
+#include <limits>
 
 SegregationFootbotController::SegregationFootbotController() {
   m_rng = CRandom::CreateRNG("segregation_loop_function");
@@ -86,7 +87,7 @@ void SegregationFootbotController::LoadFromFile(const std::string &params_filena
 }
 
 SegregationFootbotController::SensorState
-SegregationFootbotController::ClosestFirstSensor(const CCI_RangeAndBearingSensor::TReadings &tMsgs) {
+SegregationFootbotController::ClosestFirstSensor(const CCI_RangeAndBearingSensor::TReadings &tMsgs, Real &range_out) {
   auto sens_state = SensorState::NOTHING;
   if (!tMsgs.empty()) {
     float closest_range_cm = sensor_length_cm;
@@ -98,6 +99,7 @@ SegregationFootbotController::ClosestFirstSensor(const CCI_RangeAndBearingSensor
           closest_range_cm = range_cm;
           uint8_t robot_class = tMsg.Data[0];
           sens_state = (m_class == robot_class) ? SensorState::KIN : SensorState::NONKIN;
+          range_out = range_cm;
         }
       }
     }
@@ -107,7 +109,7 @@ SegregationFootbotController::ClosestFirstSensor(const CCI_RangeAndBearingSensor
 }
 
 SegregationFootbotController::SensorState
-SegregationFootbotController::KinFirstSensor(const CCI_RangeAndBearingSensor::TReadings &tMsgs) {
+SegregationFootbotController::KinFirstSensor(const CCI_RangeAndBearingSensor::TReadings &tMsgs, Real &range_out) {
   auto sens_state = SensorState::NOTHING;
   if (!tMsgs.empty()) {
     for (const auto &tMsg : tMsgs) {
@@ -115,9 +117,11 @@ SegregationFootbotController::KinFirstSensor(const CCI_RangeAndBearingSensor::TR
       if (bearing < half_beam_angle && bearing > -half_beam_angle) {
         if (tMsg.Data[0] == m_class) {
           sens_state = SensorState::KIN;
+          range_out = tMsg.Range;
           continue;
         } else {
           sens_state = SensorState::NONKIN;
+          range_out = tMsg.Range;
         }
       }
     }
@@ -126,16 +130,16 @@ SegregationFootbotController::KinFirstSensor(const CCI_RangeAndBearingSensor::TR
   return sens_state;
 }
 
-SegregationFootbotController::SensorState SegregationFootbotController::GetTrueKinSensorVal() {
+SegregationFootbotController::SensorState SegregationFootbotController::GetTrueKinSensorVal(Real &range_out) {
   const CCI_RangeAndBearingSensor::TReadings &tMsgs = m_pcRABSens->GetReadings();
   SensorState sens_state;
   switch (sensor_impl) {
     case SensorImpl::KIN_FIRST: {
-      sens_state = KinFirstSensor(tMsgs);
+      sens_state = KinFirstSensor(tMsgs, range_out);
       break;
     }
     case SensorImpl::CLOSEST_FIRST: {
-      sens_state = ClosestFirstSensor(tMsgs);
+      sens_state = ClosestFirstSensor(tMsgs, range_out);
       break;
     }
   }
@@ -189,21 +193,24 @@ void SegregationFootbotController::ControlStep() {
         break;
     }
   }
-  auto true_sensor_state = GetTrueKinSensorVal();
+  Real range;
+  auto true_sensor_state = GetTrueKinSensorVal(range);
 
   auto const &posMsgs = m_pcPosSens->GetReading();
   CRadians yaw, other;
   posMsgs.Orientation.ToEulerAngles(yaw, other, other);
-  std::cout << m_class
-            << ","
-            << static_cast<int>(true_sensor_state)
-            << ","
-            << posMsgs.Position.GetX()
-            << ","
-            << posMsgs.Position.GetY()
-            << ","
-            << yaw.GetValue()
-            << ',';
+//  std::cout << m_class
+//            << ","
+//            << static_cast<int>(true_sensor_state)
+//            << ","
+//            << posMsgs.Position.GetX()
+//            << ","
+//            << posMsgs.Position.GetY()
+//            << ","
+//            << yaw.GetValue()
+//            << ","
+//            << range
+//            << ',';
 
   auto p = m_rng->Uniform(CRange<double>(0., 1.));
   auto sensor_state = true_sensor_state;

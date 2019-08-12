@@ -49,11 +49,11 @@ public:
 
   void SetClassId(unsigned long class_id);
 
-  SensorState KinFirstSensor(const CCI_RangeAndBearingSensor::TReadings &tMsgs);
+  SensorState KinFirstSensor(const CCI_RangeAndBearingSensor::TReadings &tMsgs, Real& range_out);
 
-  SensorState ClosestFirstSensor(const CCI_RangeAndBearingSensor::TReadings &tMsgs);
+  SensorState ClosestFirstSensor(const CCI_RangeAndBearingSensor::TReadings &tMsgs, Real& range_out);
 
-  SensorState GetTrueKinSensorVal();
+  SensorState GetTrueKinSensorVal(Real &range_out);
 
   std::array<Real, GENOME_SIZE> m_params = {{0, 0, 0, 0, 0, 0}};
   CCI_DifferentialSteeringActuator *m_pcWheels = nullptr;

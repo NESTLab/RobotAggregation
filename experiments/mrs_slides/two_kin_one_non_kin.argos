@@ -25,12 +25,15 @@
 
   </controllers>
 
-  <loop_functions random_seed="0" num_classes="17">
-    <cluster center="0,0" robot_num="100" robot_density="0.10" />
+  <loop_functions random_seed="0" num_classes="2" stdev="0">
+    <single center="0.0,0.0" class="0" />
+    <single center="0.8,0.0" class="0" />
+    <single center="0.4,0.6" class="1" />
 
   </loop_functions>
 
-  <arena size="50, 50, 2" center="0,0,1">
+  <arena size="10, 10, 2" center="0,0,1">
+
   </arena>
 
   <physics_engines>
@@ -42,7 +45,7 @@
     <range_and_bearing id="rab" grid_size="1,1,1"/>
   </media>
 
+  <!-- We don't want nor need a visualization during evolution -->
   <visualization/>
-
 
 </argos-configuration>

@@ -71,6 +71,7 @@ void SegregationLoopFunction::Reset() {
     bool success;
     auto attempts = 0;
     do {
+      // Randomize initial positions
       CVector3 position_noise{m_rng->Gaussian(m_position_stdev, 0.0), m_rng->Gaussian(m_position_stdev, 0.0), 0};
       auto position = position_noise + robot_and_initial_pose.position;
       success = MoveEntity(entity, position, robot_and_initial_pose.orientation, false);
@@ -226,17 +227,17 @@ void SegregationLoopFunction::PostStep() {
     // m_cost += m_step * centroid_of_centroids(class_pos);
 
     // Not-Time-Penalized Cluster Metric, doesn't penalize time -- NOT USED IN OUR PAPER!
-    // m_cost += cluster_metric(class_pos);
+     m_cost += cluster_metric(class_pos);
 
     // Time-Penalized Clust Metric
-     m_cost += m_step * cluster_metric(class_pos);
+//     m_cost += m_step * cluster_metric(class_pos);
   } catch (argos::CARGoSException &e) {
     argos::LOG << e.what() << std::endl;
     m_cost = -999;
   }
 
   ++m_step;
-  std::cout << '\n';
+//  std::cout << '\n';
 }
 
 std::string SegregationLoopFunction::GetName() {
